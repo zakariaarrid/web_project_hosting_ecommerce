@@ -68,8 +68,8 @@
                 <div class="col-md-4 col-lg-4">
                     <div class="topbar-text">
                         <ul class="list-inline text-right">
-                            <li class="list-inline-item"><a href="#123"><span class="ti-user mr-2"></span> Login</a></li>
-                            <li class="list-inline-item"><a href="#"><span class="ti-lock mr-2"></span> Register</a>
+                            <li class="list-inline-item"><a href="{{route('loginfr')}}"><span class="ti-user mr-2"></span> Login</a></li>
+                            <li class="list-inline-item"><a href="{{route('registerfr')}}"><span class="ti-lock mr-2"></span> Register</a>
                             </li>
                         </ul>
                     </div>

@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class LoginController extends Controller
 {
     /*
@@ -39,20 +40,39 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    /**
+     * @param Request $request
+     * @return array
+     *
+     * override logout function redirect to homefr
+     */
+    public function logout(Request $request) {
+        Auth::logout();
+        return redirect('/login/fr');
+    }
+
     public function credentials(Request $request)
     {
         return array_merge($request->only($this->username(), 'password'), ['id_verified' => 1]);
     }
     public function authenticate(Request $request)
     {
-        $field = filter_var($request->email, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-        $request->merge([$field => $request->email]);
+            $field = filter_var($request->email, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'id_verified' => '1']))
-            return 'ok';
-        else return 'nok';
+            $request->merge([$field => $request->email]);
 
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'id_verified' => '1']))
+                return redirect()->route('dashboard');
+            else return 'nok';
+
+
+    }
+
+    public function redirectTo()
+    {
+        return '/@dashboard';
     }
 
 }
