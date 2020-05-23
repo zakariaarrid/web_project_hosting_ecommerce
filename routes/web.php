@@ -45,6 +45,9 @@ Route::group(['middleware'=>'auth'], function() {
 
     Route::get('/dashboard', 'UsersController@index')->name('dashboard');
     Route::get('/add-web', 'UsersController@add_web')->name('add_web');
+    Route::get('/profil', 'UsersController@profil')->name('profil');
+    Route::patch('/update/{id}', 'UsersController@update')->name('update');
+    Route::post('/insert_domaine', 'UsersController@insert_domaine')->name('insert_domaine');
 
 });
 

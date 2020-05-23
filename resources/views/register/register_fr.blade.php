@@ -843,8 +843,8 @@
 
                                 </form>
                             </div>
-                            <div class="card-footer bg-transparent px-md-5"><small>Not registered?</small>
-                                <a href="signup.html" class="small"> Create account</a></div>
+                            <div class="card-footer bg-transparent px-md-5"><small>Have an account ?</small>
+                                <a href="{{route('loginfr')}}" class="small"> Login</a></div>
                         </div>
                     </div>
                 </div>

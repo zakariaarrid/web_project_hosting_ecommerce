@@ -54,11 +54,11 @@ mix.styles([
     'resources/assets/css/themify-icons.css',
     'resources/assets/css/hs.megamenu.css',
     'resources/assets/css/animate.min.css',
-     'resources/assets/css/jquery.mb.YTPlayer.min.css',
-     'resources/assets/css/owl.carousel.min.css',
-     'resources/assets/css/owl.theme.default.min.css',
-     'resources/assets/css/style_fr.css',
-     'resources/assets/css/responsive_fr.css',
+    'resources/assets/css/jquery.mb.YTPlayer.min.css',
+    'resources/assets/css/owl.carousel.min.css',
+    'resources/assets/css/owl.theme.default.min.css',
+    'resources/assets/css/style_fr.css',
+    'resources/assets/css/responsive_fr.css',
 ], 'public/css/libs_fr.css');
 
 mix.scripts([
