@@ -10,6 +10,7 @@ class Site_commerce extends Model
         'user_id', 'name_site', 'username','password'
     ];
     public function user(){
-        return $this->hasOne('App\User');
+        return $this->belongsTo('App\User');
     }
+
 }

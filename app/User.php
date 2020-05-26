@@ -36,11 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
     public function type_subscription(){
         return $this->hasOne('App\type_subscription');
     }
     public function site_gestion(){
         return $this->hasOne('App\Site_gestion');
     }
+    public function site_commerce(){
+        return $this->hasMany('App\Site_commerce');
+    }
+
 }

@@ -70,10 +70,25 @@
                         <h4 class="pb-2 display-5">@{{domaine_ecommerce}}</h4>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-sm" @click="send_data">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                            <input type="text" id="username" name="username" v-model="username" placeholder="Username" required class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
+                            <input type="password" id="password" name="password" v-model="password" placeholder="Password" required class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-sm" @click="send_data" :disabled="IsDisabled">
                             <i class="fa fa-dot-circle-o" id="btn_id"></i> Ajouter
                             <!--<i class="fa fa-spinner fa-spin"></i>-->
                         </button>
+                    </div>
+                    <div class="form-group">
+                        <label for="" style="color:red" id="error"></label>
                     </div>
                 </div>
             </div>
@@ -84,22 +99,33 @@
                         <strong>Listes des sites</strong>
                     </div>
                     <div class="card-body card-block">
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="tab1">
                             <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col">Subdomain</th>
+                                <th scope="col"></th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
+                            <tbody id="id_body">
+                             @foreach($site_ecommerce as $site)
+                                <tr>
+                                    <td>{{$site->name_site}}</td>
+                                    <td>
+                                        <a class="btn btn-danger btn-sm" role="button" style="color: aliceblue;" href="#">
+                                            <i class="fa fa-trash-o"></i> Delete
+                                        </a>
+                                    </td>
+                                </tr>
+                              @endforeach
+                                <tr v-for="item in items">
+                                    <td>@{{item.link}}</td>
+                                    <td>
+                                        <a class="btn btn-danger btn-sm" role="button" style="color: aliceblue;" href="#">
+                                            <i class="fa fa-trash-o"></i> Delete
+                                        </a>
+                                    </td>
+                                   <td></td>
+                                </tr>
                             </tbody>
                         </table>
 
@@ -127,30 +153,62 @@
     new Vue({
         el:'#app',
         data : {
-             website : ''
+            IsDisabled : false,
+            website : '',
+            username : '',
+            password : '',
+            items : []
         },
         computed : {
             domaine_ecommerce() {
-                return 'www.domaine_e.'+this.website+'.com'
+                return 'www.'+this.website+'.domaine_e.com'
             }
         },
         methods : {
             send_data() {
-                let element = document.getElementById("btn_id");
-                element.classList.remove("fa-dot-circle-o");
 
-                element.classList.add("fa-spinner");
-                element.classList.add("fa-spin");
+                document.getElementById("error").innerHTML = '';
+                if(this.website != '' && this.username != '' && this.password != '') {
+                    let element = document.getElementById("btn_id");
+                    element.classList.remove("fa-dot-circle-o");
 
-                axios.post('insert_domaine',{
-                    domaine : this.domaine_ecommerce
-                })
-                    .then(res => {
-                        console.log(res)
+                    element.classList.add("fa-spinner");
+                    element.classList.add("fa-spin");
+
+                    this.IsDisabled = true
+
+                    axios.post('insert_domaine', {
+                        domaine: this.domaine_ecommerce,
+                        password: this.password,
+                        username: this.username
                     })
-                    .catch((e) =>{
-                        console.log(e)
-                    })
+                        .then(res => {
+                            console.log(res.data)
+                            element.classList.remove("fa-spinner");
+                            element.classList.remove("fa-spin");
+                            element.classList.add("fa-dot-circle-o");
+
+                            if(res.data == 0) {
+                                /*****/
+                                let data = {
+                                    link:this.domaine_ecommerce,
+                                    id:this.domaine_ecommerce
+                                };
+                                this.items.push(data)
+                                /*****/
+
+
+                                this.IsDisabled = false
+                            }else {
+                                document.getElementById("error").innerHTML = 'Ce sub-domaine exist déjà ';
+                                this.IsDisabled = false
+                            }
+
+                        })
+                        .catch((e) => {
+                            console.log(e)
+                        })
+                }
 
 
             }
