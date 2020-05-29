@@ -22,8 +22,7 @@
     <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
     <link rel="stylesheet" href="vendors/selectFX/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="vendors/jqvmap/dist/jqvmap.min.css">
-
-
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 
     <link href="{{ asset('css/libs_dash.css') }}" rel="stylesheet">
@@ -64,10 +63,8 @@
                 </div>
                 <div class="card-body card-block">
                     <div class="form-group">
-                        <input type="text" v-model="website" name="website" class="form-control" placeholder="Ajouter un website">
-                    </div>
-                    <div class="form-group">
-                        <h4 class="pb-2 display-5">@{{domaine_ecommerce}}</h4>
+                        <input type="text" v-model="website" id="website_2" name="website" class="form-control" placeholder="Ajouter un website">
+                        <small class="form-text text-muted" id="domainename">@{{domaine_ecommerce}}</small>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
@@ -77,7 +74,13 @@
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
+                            <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                            <input type="text" id="nom_complet" name="nom_complet" v-model="nom_complet" placeholder="Nom complet" required class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon" style="font-size: 0.8rem;"><i class="fa fa-asterisk"></i></div>
                             <input type="password" id="password" name="password" v-model="password" placeholder="Password" required class="form-control">
                         </div>
                     </div>
@@ -86,6 +89,18 @@
                             <i class="fa fa-dot-circle-o" id="btn_id"></i> Ajouter
                             <!--<i class="fa fa-spinner fa-spin"></i>-->
                         </button>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <h3 class="h_title" id="id_h_title" style="display:none;">Génération <span class="blue">Base de données</span></h3>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="progress col-sm-12" style="display: none;" id="id_bar">
+                            <div class="bar" id="id_width" style="width:5%;">
+                                <p class="percent" id="id_percent">5%</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="" style="color:red" id="error"></label>
@@ -109,9 +124,9 @@
                             <tbody id="id_body">
                              @foreach($site_ecommerce as $site)
                                 <tr>
-                                    <td>{{$site->name_site}}</td>
+                                    <td><a href="{{$site->name_site}}" target="blank">{{$site->name_site}}</a></td>
                                     <td>
-                                        <a class="btn btn-danger btn-sm" role="button" style="color: aliceblue;" href="#">
+                                        <a class="btn btn-danger btn-sm" role="button" style="border-radius: 9px;color: aliceblue;font-size: 11px;" href="#">
                                             <i class="fa fa-trash-o"></i> Delete
                                         </a>
                                     </td>
@@ -140,7 +155,7 @@
 <script src="vendors/jquery/dist/jquery.min.js"></script>
 <script src="vendors/popper.js/dist/umd/popper.min.js"></script>
 <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="assets/js/main.js"></script>
+
 
 
 
@@ -148,76 +163,13 @@
 <script src="assets/js/widgets.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-<script>
-    new Vue({
-        el:'#app',
-        data : {
-            IsDisabled : false,
-            website : '',
-            username : '',
-            password : '',
-            items : []
-        },
-        computed : {
-            domaine_ecommerce() {
-                return 'www.'+this.website+'.domaine_e.com'
-            }
-        },
-        methods : {
-            send_data() {
-
-                document.getElementById("error").innerHTML = '';
-                if(this.website != '' && this.username != '' && this.password != '') {
-                    let element = document.getElementById("btn_id");
-                    element.classList.remove("fa-dot-circle-o");
-
-                    element.classList.add("fa-spinner");
-                    element.classList.add("fa-spin");
-
-                    this.IsDisabled = true
-
-                    axios.post('insert_domaine', {
-                        domaine: this.domaine_ecommerce,
-                        password: this.password,
-                        username: this.username
-                    })
-                        .then(res => {
-                            console.log(res.data)
-                            element.classList.remove("fa-spinner");
-                            element.classList.remove("fa-spin");
-                            element.classList.add("fa-dot-circle-o");
-
-                            if(res.data == 0) {
-                                /*****/
-                                let data = {
-                                    link:this.domaine_ecommerce,
-                                    id:this.domaine_ecommerce
-                                };
-                                this.items.push(data)
-                                /*****/
-
-
-                                this.IsDisabled = false
-                            }else {
-                                document.getElementById("error").innerHTML = 'Ce sub-domaine exist déjà ';
-                                this.IsDisabled = false
-                            }
-
-                        })
-                        .catch((e) => {
-                            console.log(e)
-                        })
-                }
-
-
-            }
-        }
-    })
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="assets/js/main.js"></script>
 
 
 
-</script>
+
 
 
 

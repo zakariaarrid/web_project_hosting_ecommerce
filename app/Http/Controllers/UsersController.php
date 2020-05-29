@@ -61,13 +61,12 @@ class UsersController extends Controller
        // $sites_ecommerce = $user->site_commerce;
         $sites_ecommerce = Site_commerce::where('name_site','=',$request->domaine)->count();
 
-        if($sites_ecommerce >0 || $request->username == '' || $request->password == '') {
-
-           return 'exist';
+        if($sites_ecommerce >0 || $request->username == '' || $request->password == '' || $request->nom_complet == '') {
+          return 'exist';
         }else {
           $dbname='bb';
-          DB::statement("CREATE DATABASE bb");
-          DB::statement("CREATE TABLE bb.cities (
+          DB::statement("CREATE DATABASE ".$dbname);
+          DB::statement("CREATE TABLE ".$dbname.".cities (
             `id` int(11) NOT NULL,
             `city` varchar(255) NOT NULL
           ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
@@ -736,251 +735,94 @@ class UsersController extends Controller
               ADD PRIMARY KEY (`id`);");
             DB::statement("ALTER TABLE ".$dbname.".newsletter
                   ADD PRIMARY KEY (`id`)");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".options
                   ADD PRIMARY KEY (`id`)");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".pages
                   ADD PRIMARY KEY (`id`)");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".players
                   ADD PRIMARY KEY (`id`)");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".products
                   ADD PRIMARY KEY (`id`)");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".promotions
                   ADD PRIMARY KEY (`id`)");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".searchterms
                   ADD PRIMARY KEY (`id`)");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".shippingfees
                   ADD PRIMARY KEY (`id`)");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".slides
                   ADD PRIMARY KEY (`id`)");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".sms
                   ADD PRIMARY KEY (`id`)");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".statistics
                   ADD PRIMARY KEY (`id`)");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".tracking
                   ADD PRIMARY KEY (`id`)");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".trackingstates
                   ADD PRIMARY KEY (`id`)");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".users
                   ADD PRIMARY KEY (`id`)");
             DB::statement("ALTER TABLE ".$dbname.".categories
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".changeaddress
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".cities
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8692");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".clients
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1210");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".colors
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".commands
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1202");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".commandsdetails
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1266");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".comments
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".coupons
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".expenses
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".historylog
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".homepage
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".inventory
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".medias
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".messages
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".newsletter
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".options
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".pages
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".players
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".products
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".promotions
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".searchterms
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".shippingfees
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".slides
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".sms
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".statistics
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=331");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".tracking
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6");
-
-
-
-
             DB::statement("ALTER TABLE ".$dbname.".trackingstates
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8");
-
             DB::statement("ALTER TABLE ".$dbname.".users
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4");
+
+            Site_commerce::create(['user_id' => $user->id,'name_site' => $request->domaine,'password' => $request->password,'username' => $request->username]);
+
+
 
         }
         return $sites_ecommerce ;

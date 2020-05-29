@@ -25,14 +25,11 @@ Route::get('/login/fr', 'HomeController@loginfr')->name('loginfr');
 
 Route::post('/log', 'Auth\LoginController@authenticate')->name('log');
 
-Auth::routes();
+//Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('logout', 'Auth\LoginController@logout', function () {
-    return 'test';
-    //return view('homefr');
-});
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 
 Route::get('/register/fr', 'HomeController@registerfr')->name('registerfr');
