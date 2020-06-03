@@ -45,6 +45,9 @@ Route::group(['middleware'=>'auth'], function() {
     Route::get('/profil', 'UsersController@profil')->name('profil');
     Route::patch('/update/{id}', 'UsersController@update')->name('update');
     Route::post('/insert_domaine', 'UsersController@insert_domaine')->name('insert_domaine');
+    Route::post('/delete', 'UsersController@delete')->name('insert_domaine');
+    Route::post('/abonnement', 'UsersController@abonnement')->name('abonnement');
+    Route::get('/pricing', 'UsersController@pricing')->name('pricing');
 
 });
 

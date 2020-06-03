@@ -808,6 +808,11 @@
                                 <button class="btn btn-block primary-solid-btn border-radius mt-4 mb-3">
                                     Sign in
                                 </button>
+                                <div class="form-group" id="error">
+                                    @if ($message = Session::get('error'))
+                                        كلمة المرور أو إميل خط
+                                    @endif
+                                </div>
 
                             </form>
 

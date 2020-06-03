@@ -90,6 +90,9 @@
                             <!--<i class="fa fa-spinner fa-spin"></i>-->
                         </button>
                     </div>
+                    <div class="form-group" id="error">
+                        <small class="form-text text-muted" style="color:#ef4242 !important;">@{{errors_password}} </small>
+                    </div>
                     <div class="form-group">
                         <div class="col-sm-12">
                             <h3 class="h_title" id="id_h_title" style="display:none;">Génération <span class="blue">Base de données</span></h3>
@@ -126,23 +129,47 @@
                                 <tr>
                                     <td><a href="{{$site->name_site}}" target="blank">{{$site->name_site}}</a></td>
                                     <td>
-                                        <a class="btn btn-danger btn-sm" role="button" style="border-radius: 9px;color: aliceblue;font-size: 11px;" href="#">
-                                            <i class="fa fa-trash-o"></i> Delete
-                                        </a>
+                                        <form method="POST" action="delete" id="form_id_{{$site->id}}">
+                                            @csrf
+                                            <input type="hidden" name="commerce" value="{{$site->name_site}}">
+                                            <button class="btn btn-danger btn-sm"  type="button" style="border-radius: 9px;color: aliceblue;font-size: 11px;" onclick="showmodal('{{$site->id}}')">
+                                                <i class="fa fa-trash-o"></i> Supprimer
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                               @endforeach
                                 <tr v-for="item in items">
-                                    <td>@{{item.link}}</td>
+                                    <td><a :href="item.link">@{{item.link.trim()}}</a></td>
                                     <td>
-                                        <a class="btn btn-danger btn-sm" role="button" style="color: aliceblue;" href="#">
-                                            <i class="fa fa-trash-o"></i> Delete
-                                        </a>
+                                        <form method="POST" action="delete" :id="'form_id_'+item.link.replace(/\./g, '')">
+                                            @csrf
+                                            <input type="hidden" name="commerce" :value="item.link">
+                                            <button class="btn btn-danger btn-sm" type="button" style="border-radius: 9px;color: aliceblue;font-size: 11px;"   @click="showmodal_vue(item.link)">
+                                                <i class="fa fa-trash-o"></i> Supprimer
+                                            </button>
+                                        </form>
                                     </td>
                                    <td></td>
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="modal fade" id="confirmation_delete" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <p>
+                                            Vous voulez vraiment supprimer ce domaine
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-danger" onclick="confirm_delete()">Supprimer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
                     </div>
                 </div>
@@ -166,9 +193,20 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="assets/js/main.js"></script>
+<script>
+    var name_domaine = '';
+    function showmodal(name) {
+        name_domaine = name;
+       $('#confirmation_delete').modal('show');
+    }
+    function confirm_delete() {
 
-
-
+        $('#form_id_'+name_domaine).submit();
+    }
+    @if(Session::get('deleted_domaine'))
+      toastr.error("Votre sub-domaine a été supprimer avec succès");
+    @endif
+</script>
 
 
 

@@ -4182,3 +4182,6 @@ button.scroll-top:focus {
     -webkit-filter: grayscale(0);
     filter: grayscale(0);
 }
+#error {
+    color:#ef4242 !important;
+}

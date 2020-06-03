@@ -9279,6 +9279,10 @@ button.scroll-top:focus {
     left: auto;
     right: 0;
 }
+#error {
+    color:#ef4242 !important;
+}
+
 
 @font-face {
 	font-family: 'themify';

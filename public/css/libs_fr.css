@@ -5864,6 +5864,10 @@ button.scroll-top:focus {
     -webkit-filter: grayscale(0);
     filter: grayscale(0);
 }
+#error {
+    color:#ef4242 !important;
+}
+
 /*Extra small devices (portrait phones, less than 576px)*/
 @media (min-width: 320px) and (max-width: 575px){
     html{

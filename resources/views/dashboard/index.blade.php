@@ -46,9 +46,9 @@
 
     <!-- Header-->
     @include('dashboard.layout.headerTop')
-    <!-- Header-->   
+    <!-- Header-->
 
-    <div class="content mt-3">       
+    <div class="content mt-3">
         <div class="col-xl-3 col-lg-6">
           <a href="{{route('add_web')}}">
             <div class="card">
@@ -62,7 +62,7 @@
                     </div>
                 </div>
             </div>
-          </a>  
+          </a>
 
         </div>
     </div> <!-- .content -->
@@ -75,10 +75,12 @@
 <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="assets/js/main.js"></script>
 
-
 <script src="vendors/chart.js/dist/Chart.bundle.min.js"></script>
 <script src="assets/js/dashboard.js"></script>
 <script src="assets/js/widgets.js"></script>
+<script src="vendors/jqvmap/dist/jquery.vmap.min.js"></script>
+<script src="vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+<script src="vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
 <script>
     (function($) {
         "use strict";

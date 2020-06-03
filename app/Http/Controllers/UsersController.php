@@ -42,7 +42,9 @@ class UsersController extends Controller
 
 
     public function update(Request $request) {
+
         $user = Auth::user();
+
         if($user->update(array_filter($request->all()))){
             Session::flash('edit_user','La modification est faite avec succès');
         }
@@ -54,8 +56,11 @@ class UsersController extends Controller
 
     public function insert_domaine(Request $request) {
 
-
-
+        $request->validate([
+            'password' => 'required|min:7',
+            'nom_complet' => 'required',
+            'username' => 'required'
+        ]);
 
         $user = Auth::user();
        // $sites_ecommerce = $user->site_commerce;
@@ -820,13 +825,39 @@ class UsersController extends Controller
             DB::statement("ALTER TABLE ".$dbname.".users
                   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4");
 
-            Site_commerce::create(['user_id' => $user->id,'name_site' => $request->domaine,'password' => $request->password,'username' => $request->username]);
+            Site_commerce::create(['user_id' => $user->id,'name_site' => str_replace(' ','',$request->domaine),'password' => $request->password,'username' => $request->username]);
 
 
 
         }
         return $sites_ecommerce ;
 
+    }
+    public function delete(Request $request) {
+
+        $name = preg_replace('#^.*?\.(.*?)\..*$#i', '$1', $request->commerce);
+
+        $site = Site_commerce::where('name_site' ,'=', $request->commerce);
+
+        if($site->delete()) {
+
+            return redirect()->route('add_web')->with('deleted_domaine','Votre sub-domaine a été supprimer avec succès');
+        }
+        return redirect()->route('add_web');
+    }
+    /*
+     * Abonnement
+     * */
+    public function pricing() {
+         return view('dashboard.pricing');
+    }
+    /*
+     * Payer
+     * */
+    public function abonnement(Request $request) {
+         Session ::flash('pay',$request->pay);
+
+         return view('dashboard.abonnement');
     }
 
 }

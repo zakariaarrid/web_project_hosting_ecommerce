@@ -1083,7 +1083,9 @@ aside.left-panel {
         line-height: 30px;
         padding: 10px 0;
         position: relative;
-        width: 100%; }
+        width: 100%;
+        font-size: 10pt;
+      }
         .navbar .navbar-nav li > a:hover,
         .navbar .navbar-nav li > a:hover .menu-icon {
           color: #fff !important; }
@@ -2493,3 +2495,10 @@ header .form-inline {
 .h_title{
     font-size: 8pt;
 }
+.menu_principal li a {
+    font-size: 10pt !important;
+}
+.menu_principal li a i {
+    width: 35px !important;
+}
+

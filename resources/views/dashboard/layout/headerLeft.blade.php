@@ -15,23 +15,18 @@
                 <li class="active">
                     <a href="{{route('dashboard')}}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="{{route('profil')}}"> <i class="menu-icon fa fa-user"></i>Profil </a>
                 </li>
                 <li>
-                    <a href="{{route('add_web')}}"> <i class="menu-icon fa fa-plus"></i>Ajouter site ecommerce</a>
+                    <a href="{{route('add_web')}}"> <i class="menu-icon fa fa-plus"></i>Créer les sites e-commerce</a>
                 </li>
-                <li class="menu-item dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-usd"></i>Abonnement</a>
+                <li>
+                    <a href="{{route('add_web')}}"> <i class="menu-icon fa fa-sitemap"></i>Créer ...</a>
                 </li>
-               <!-- <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Components</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-puzzle-piece"></i><a href="ui-buttons.html">Buttons</a></li>
-                        <li><i class="fa fa-bars"></i><a href="ui-tabs.html">Abonnement</a></li>
-                        <li><i class="fa fa-share-square-o"></i><a href="ui-social-buttons.html">Chat (Soon)</a></li>
-                    </ul>
-                </li>--<
+                <li>
+                    <a href="{{route('pricing')}}"> <i class="menu-icon fa fa-usd"></i>Abonnement</a>
+                </li>
 
             </ul>
         </div><!-- /.navbar-collapse -->

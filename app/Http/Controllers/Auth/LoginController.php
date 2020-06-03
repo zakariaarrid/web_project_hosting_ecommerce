@@ -65,7 +65,9 @@ class LoginController extends Controller
 
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'id_verified' => '1']))
                 return redirect()->route('dashboard');
-            else return 'nok';
+            else {
+                return back()->with('error','Mots de passe ou email incorrect');
+            }
 
 
     }

@@ -51,7 +51,6 @@
         <div class="col-lg-12">
             @if(\Illuminate\Support\Facades\Session::has('edit_user'))
                 <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
-                    <span class="badge badge-pill badge-success">Success</span>
                     {{session('edit_user')}}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">×</span>
@@ -68,22 +67,22 @@
                             {!! Form::text('name', null , ['class'=>'form-control','placeholder' => 'nom']) !!}
                         </div>
                         <div class="form-group">
-                            <label for="vat" class=" form-control-label">Telephone</label>
-                            {!! Form::text('telephone', null , ['class'=>'form-control','placeholder' => 'telephone']) !!}
+                            <label for="vat" class=" form-control-label">Téléphone</label>
+                            {!! Form::text('Telephone', null , ['class'=>'form-control','placeholder' => 'telephone']) !!}
                         </div>
                             <div class="row form-group">
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="ville" class=" form-control-label">Ville</label>
                                         <!--<input type="text" id="city" placeholder="Ville" class="form-control">-->
-                                        {!! Form::text('ville', null , ['class'=>'form-control','placeholder' => 'ville']) !!}
+                                        {!! Form::text('Ville', null , ['class'=>'form-control','placeholder' => 'ville']) !!}
 
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="postal-code" class=" form-control-label">Postal Code</label>
-                                        <input type="text" id="postal-code" placeholder="Postal Code" class="form-control">
+                                        {!! Form::text('code_postal', null , ['class'=>'form-control','placeholder' => 'Postal Code']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -93,9 +92,6 @@
                                 </button>
                             </div>
                         </div>
-
-
-
                      {!! Form::close() !!}
 
             </div>

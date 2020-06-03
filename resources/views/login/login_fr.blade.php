@@ -771,11 +771,6 @@
                                                 </div>
                                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-                                                @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         <!-- Password -->
@@ -794,13 +789,8 @@
                                                 <div class="input-icon">
                                                     <span class="ti-lock color-primary"></span>
                                                 </div>
-                                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                                <input id="password" type="password" class="form-control" name="password" required autocomplete="current-password">
 
-                                                @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
                                             </div>
                                         </div>
 
@@ -808,7 +798,13 @@
                                         <button class="btn btn-block primary-solid-btn border-radius mt-4 mb-3">
                                             Sign in
                                         </button>
-
+                                        <div class="form-group" id="error">
+                                            <small class="form-text text-muted" style="color:#ef4242 !important;">
+                                               @if ($message = Session::get('error'))
+                                                    {{$message}}
+                                               @endif
+                                            </small>
+                                        </div>
                                     </form>
                                 </div>
                                 <div class="card-footer bg-transparent px-md-5"><small>Not registered?</small>
